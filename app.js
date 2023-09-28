@@ -14,7 +14,7 @@ const findOrCreate = require('mongoose-findorcreate');
 
 const app = express();
 const port = 3000;
-
+app.set('trust proxy', 1);
 app.set('view engine', 'ejs')
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({
     secret: process.env.SOME_LONG_UNGUESSABLE_STRING,
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: true  //false
 }));
 
 //1.3.setup passport
