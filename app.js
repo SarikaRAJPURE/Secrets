@@ -7,6 +7,7 @@ require('dotenv').config();
 //const encrypt = require('mongoose-encryption');
 //1.1authenticate user using passport and session
 const session = require('express-session');
+//const session = require('cookie-session');
 const passport = require('passport');
 const passportLocalMongoose = require('passport-local-mongoose');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
@@ -14,7 +15,7 @@ const findOrCreate = require('mongoose-findorcreate');
 
 const app = express();
 const port = 3000;
-app.set('trust proxy', 1);
+
 app.set('view engine', 'ejs')
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -22,7 +23,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({
     secret: process.env.SOME_LONG_UNGUESSABLE_STRING,
     resave: false,
-    saveUninitialized: true  //false
+    saveUninitialized: false,  //false    
 }));
 
 //1.3.setup passport
